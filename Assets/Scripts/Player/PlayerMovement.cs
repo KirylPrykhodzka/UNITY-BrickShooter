@@ -46,10 +46,14 @@ public class CharacterMovement : MonoBehaviour
                 movementX = -1;
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
+        var mousePosition = Input.mousePosition;
+        var playerPosition = Camera.main.WorldToScreenPoint(transform.position);
+        mousePosition.x = mousePosition.x - playerPosition.x;
+        mousePosition.y = mousePosition.y - playerPosition.y;
+        var angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+
         playerBody.AddForce(new Vector2(movementX * Time.deltaTime * moveSpeed, movementY * Time.deltaTime * moveSpeed));
     }
 }

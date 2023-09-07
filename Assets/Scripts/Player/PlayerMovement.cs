@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private Rigidbody2D playerBody;
 
     private int movementX = 0;

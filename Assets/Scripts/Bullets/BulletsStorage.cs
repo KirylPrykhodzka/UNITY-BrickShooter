@@ -10,10 +10,10 @@ public class BulletsStorage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            bullets.Enqueue(Instantiate(bulletPrefab));
-        }
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    bullets.Enqueue(Instantiate(bulletPrefab));
+        //}
     }
 
     public GameObject GetBullet()

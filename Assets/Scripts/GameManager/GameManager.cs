@@ -1,16 +1,20 @@
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{    
-    // Start is called before the first frame update
-    void Start()
+{
+    [SerializeField] GameObject bricks;
+
+    void Update()
     {
-        
+        if(bricks.transform.childCount == 0)
+        {
+            OnVictory();
+        }
     }
 
-    public void OnVictory()
+    void OnVictory()
     {
-
+        Time.timeScale = 0;
     }
 
     public void OnLoss()

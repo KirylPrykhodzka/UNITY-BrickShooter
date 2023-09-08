@@ -3,14 +3,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Rigidbody2D playerBody;
+    [SerializeField] private Rigidbody2D body;
 
+    private PlayerStatus status;
     private int movementX = 0;
     private int movementY = 0;
 
     private void Start()
     {
-        playerBody = gameObject.GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
+        status = GetComponent<PlayerStatus>();
     }
 
     void Update()
@@ -47,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if(!status.IsAlive)
+        {
+            return;
+        }
+
         var mousePosition = Input.mousePosition;
         var playerPosition = Camera.main.WorldToScreenPoint(transform.position);
         mousePosition.x = mousePosition.x - playerPosition.x;
@@ -54,6 +61,6 @@ public class PlayerMovement : MonoBehaviour
         var angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
 
-        playerBody.AddForce(new Vector2(movementX * Time.deltaTime * moveSpeed, movementY * Time.deltaTime * moveSpeed));
+        body.AddForce(new Vector2(movementX * Time.deltaTime * moveSpeed, movementY * Time.deltaTime * moveSpeed));
     }
 }
